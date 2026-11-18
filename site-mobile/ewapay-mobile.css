@@ -1,0 +1,101 @@
+/* =====================================================================
+   EwaPay — correctifs UX mobile (ewapay.app)
+   À charger APRÈS /assets/ewapay-fil.css. N'agit que sous 900 px de
+   large : l'affichage ordinateur ne change pas.
+   ===================================================================== */
+
+/* 1. Plus aucun défilement horizontal (320 px : e-mail du pied de page,
+      curseurs du simulateur, compteur des thèmes de la FAQ) */
+html,body{overflow-x:clip}
+.foot a,.ans{overflow-wrap:anywhere}
+.field input[type=range]{max-width:100%}
+
+@media (max-width:900px){
+
+  /* 2. Accueil : actions pleine largeur, faciles à atteindre au pouce */
+  .hero .ctas{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin-top:26px}
+  .hero .ctas .btn{width:100%;min-height:54px;font-size:17px}
+
+  /* Badges Android / iOS « Bientôt » : côte à côte et compacts, au lieu
+     de deux lignes pleines qui repoussent le contenu */
+  .hero .stores{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .hero .store{min-height:48px;padding:6px 8px;gap:8px}
+  .hero .store__icon{width:30px;height:30px}
+  .hero .store__small{display:none}
+  .hero .store__big{font-size:15px}
+  .hero .store__soon{margin-left:auto}
+  .store__small{font-size:12.5px}
+  .store__soon{font-size:11.5px}
+
+  /* Maquette du téléphone moins haute : le contenu arrive plus vite */
+  .hero .device--static{width:min(64%,230px);margin-inline:auto}
+  .inline-shot{width:min(62%,220px)}
+
+  /* 3. Simulateur : curseurs faciles à saisir au doigt */
+  .field input[type=range]{
+    -webkit-appearance:none;appearance:none;height:44px;margin-top:2px;
+    background:transparent;touch-action:pan-y;cursor:pointer
+  }
+  .field input[type=range]::-webkit-slider-runnable-track{
+    height:8px;border-radius:99px;
+    background:linear-gradient(90deg,var(--accent) var(--p,50%),#DCD9CF var(--p,50%))
+  }
+  .field input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:#DCD9CF}
+  .field input[type=range]::-moz-range-progress{height:8px;border-radius:99px;background:var(--accent)}
+  .field input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:30px;height:30px;margin-top:-11px;border-radius:50%;
+    background:#fff;border:3px solid var(--accent);box-shadow:0 2px 8px rgba(16,27,63,.25)
+  }
+  .field input[type=range]::-moz-range-thumb{
+    width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--accent);
+    box-shadow:0 2px 8px rgba(16,27,63,.25)
+  }
+  .field input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:8px}
+  .field output{font-size:22px}
+  .legend,.field__scale{font-size:13px}
+  .ticket{padding:22px 18px}
+  .ticket .note{font-size:13px}
+  .total b{font-size:34px}
+
+  /* 4. Zones tactiles d'au moins 44 px (recommandation Apple / Google) */
+  .foot a{display:flex;align-items:center;min-height:44px;margin-top:0}
+  .foot .brand{min-height:0}
+  .more{min-height:44px}
+  .copy-link{min-height:44px}
+  .mobile-menu a{min-height:48px;display:flex;align-items:center}
+
+  /* 5. Textes trop petits */
+  .eyebrow{font-size:13px}
+
+  /* 6. FAQ : le compteur « 5 questions » passe sous le titre au lieu de
+        déborder de l'écran */
+  .cat__head{flex-wrap:wrap;row-gap:4px}
+  .cat__head h2{font-size:24px;min-width:0}
+
+  /* 7. Bloc final : badges pleine largeur */
+  .end__box .stores{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+  .end__box .store{width:100%}
+
+  /* 8. Barre d'action fixe en bas d'écran (affichée par ewapay-mobile.js) */
+  .m-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;gap:8px;
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    background:color-mix(in srgb,var(--navy) 94%,transparent);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border-top:1px solid rgba(255,255,255,.12);
+    transform:translateY(110%);transition:transform .25s ease;
+  }
+  .m-cta.is-on{transform:none}
+  .m-cta .btn{flex:1;min-height:48px;padding:0 14px;font-size:15px}
+  .m-cta .btn--ghost{flex:0 0 auto;color:#F6F4EE}
+  body.has-m-cta{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+  .site-head.is-open ~ .m-cta{display:none}
+}
+
+@media (max-width:360px){
+  .hero h1{font-size:40px}
+  .m-cta .btn--ghost{display:none}
+}
+
+@media (min-width:901px){.m-cta{display:none}}
+@media (prefers-reduced-motion:reduce){.m-cta{transition:none}}
