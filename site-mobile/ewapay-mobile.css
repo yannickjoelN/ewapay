@@ -58,7 +58,7 @@ html,body{overflow-x:clip}
   .total b{font-size:34px}
 
   /* 4. Zones tactiles d'au moins 44 px (recommandation Apple / Google) */
-  .foot a{display:flex;align-items:center;min-height:44px;margin-top:0}
+  .foot a{display:flex;align-items:center;min-height:44px;margin-top:0;padding-block:8px}
   .foot .brand{min-height:0}
   .more{min-height:44px}
   .copy-link{min-height:44px}
@@ -90,6 +90,10 @@ html,body{overflow-x:clip}
   .m-cta .btn--ghost{flex:0 0 auto;color:#F6F4EE}
   body.has-m-cta{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
   .site-head.is-open ~ .m-cta{display:none}
+}
+
+@media (max-width:400px){
+  .foot__grid{grid-template-columns:minmax(0,1fr);gap:24px}
 }
 
 @media (max-width:360px){
